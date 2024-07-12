@@ -43,7 +43,9 @@ const Gift = () => {
   const { writeContractAsync } = useWriteContract();
 
 
-
+  const handleClear = () => {
+    setLink("")
+  }
 
 
 
