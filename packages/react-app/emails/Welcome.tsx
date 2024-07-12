@@ -15,6 +15,8 @@ import * as React from "react";
 interface KoalaWelcomeEmailProps {
   userFirstname: string;
   address: string;
+  content: string;
+  link: any;
 }
 
 const baseUrl = process.env.VERCEL_URL
@@ -22,7 +24,7 @@ const baseUrl = process.env.VERCEL_URL
   : "";
 
 export const SendGiftMail = ({
-  userFirstname, address
+  userFirstname, address, content , link
 }: KoalaWelcomeEmailProps) => (
   <Html>
     <Head />
@@ -42,13 +44,16 @@ export const SendGiftMail = ({
         <Text style={paragraph}>
           Welcome to CryptoGift, you have been gifted by {address}
         </Text>
+        <Text style={paragraph}>
+            {content}
+        </Text>
         <Section style={btnContainer}>
-          <Button style={button} href="https://getkoala.com">
-            Get started
+          <Button style={button} href={link}>
+            Claim Token
           </Button>
         </Section>
         <Text style={paragraph}>
-          Best,
+          Best regards,
           <br />
           The CryptGift team
         </Text>

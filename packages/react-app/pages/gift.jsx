@@ -28,7 +28,7 @@ const Gift = () => {
   const [recipentName, setRecipentName] = useState('')
   const [subjectLine, setSubjectLine] = useState('')
   
-  const emailHtml = render(<SendGiftMail userFirstname={recipentName} address={address} />);
+  const emailHtml = render(<SendGiftMail userFirstname={recipentName} address={address} link={link} />);
 
   const { data: simulateGift, error: simulaterrorGift } = useSimulateContract({
     abi: startPayAbi.abi,
@@ -86,33 +86,47 @@ const Gift = () => {
 
     const link = await createPaymentLink();
 
-    if (link) { 
-      fetch('/api/emails/sendemail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: 'bolarinwamuhdsodiq0@gmail.com',
-          reciever: email,
-          subject: subjectLine,
-          message: emailHtml,
-        }),
-      }).then((res) => res.json()).then(data => console.log(data)).catch(err => console.log(err));
-      try {
-         await writeContractAsync(
-          simulateGift?.request
-        )
-      } catch (error) {
-        console.log(error)
+    try {
+      if (link) { 
+        fetch('/api/emails/sendemail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: 'bolarinwamuhdsodiq0@gmail.com',
+            reciever: email,
+            subject: subjectLine,
+            message: emailHtml,
+          }),
+        }).then((res) => res.json()).then(data => console.log(data)).catch(err => console.log(err));
+        try {
+           await writeContractAsync(
+            simulateGift?.request
+          )
+        } catch (error) {
+          console.log(error)
+        }
       }
+    } catch (error) {
+      console.log(error)
     }
+  }
+
+  const makeTx = async (e) => {
+    e.preventDefault();
+    try {
+      await writeContractAsync(
+       simulateGift?.request
+     )
+   } catch (error) {
+     console.log(error)
+   }
   }
   return (
     <div>
       <div className=" text-white flex justify-center items-center flex-col">
-        <button onClick={performGift} className=" text-black">Send Email</button>
-        <form action="">
+        <form action="" onSubmit={performGift}>
           <CustomInput
             className={" mt-5 py-5 px-3 text-black" }
             onChange={(e) => setRecipentName(e.target.value)}
@@ -127,18 +141,24 @@ const Gift = () => {
           />
           <CustomInput
             className={" mt-5 py-5 px-3 text-black" }
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={"Email Address"}
+            name={"address"}
+          />
+          <CustomInput
+            className={" mt-5 py-5 px-3 text-black" }
             onChange={(e) => setAmount(e.target.value)}
             placeholder={"Gifting Amount"}
             name={"name"}
           />
           <CustomInput
-            className={" mt-5 text-black"}
+            className={" mt-5 py-5 px-3 text-black mb-5"}
             onChange={(e) => setContent(e.target.value)}
             placeholder={"Message to the owner"}
             name={"name"}
           />
-          <CustomTextarea 
-          onChange={(e) => setContent(e.target.value) }  className=" text-black"/>
+          {/* <CustomTextarea 
+          onChange={(e) => setContent(e.target.value) }  className=" text-black"/> */}
           <div>
             <button className=" bg-[#1e50ff] text-white w-[200px] h-[50px] rounded-lg  flex justify-center items-center">
               Create Event
