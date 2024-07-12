@@ -23,5 +23,8 @@
   ],
   "devDependencies": {
     "daisyui": "^4.12.10"
+  },
+  "dependencies": {
+    "@squirrel-labs/peanut-sdk": "^0.4.51"
   }
 }
