@@ -31,7 +31,7 @@ const Gift = () => {
   
   const { isLoading: isLoadGift, startLoading: startLoadPGift, stopLoading: stopLoadPGift } = useLoading()
 
-  const emailHtml = render(<SendGiftMail userFirstname={recipentName} address={address} link={link} />);
+  const emailHtml = render(<SendGiftMail userFirstname={recipentName} address={address} link={link[0]} />);
 
   const { data: simulateGift, error: simulaterrorGift } = useSimulateContract({
     abi: startPayAbi.abi,
@@ -71,9 +71,9 @@ const Gift = () => {
           chainId: chainId,
           tokenAmount: amount,
           tokenDecimals: 18,
-          tokenType: 0,
+          tokenType: 1,
           tokenAddress: '0x874069fa1eb16d44d622f2e0ca25eea172369bc1',
-          baseUrl: 'http://localhost:3000/claim',
+          // baseUrl: 'http://localhost:3000/claim',
         },
       });
       setLink(link);
@@ -137,7 +137,7 @@ const Gift = () => {
   return (
     <div>
       <div className=" text-white flex justify-center items-center flex-col">
-        <form action="" onSubmit={performGift}>
+        <form action="" onSubmit={handleGift}>
           <CustomInput
             className={" mt-5 py-5 px-3 text-black" }
             onChange={(e) => setRecipentName(e.target.value)}
