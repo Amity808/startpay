@@ -14,7 +14,8 @@ import {
 import startPayAbi from "../contract/startpay.json"
 import { render } from '@react-email/components';
 import SendGiftMail from "../emails/Welcome";
-
+import useLoading from "../hooks/useLoading"
+import { toast } from "react-toastify";
 // import {sendMailSMT } from "../libs/email"
 const Gift = () => {
   const [amount, setAmount] = useState("");
@@ -28,6 +29,8 @@ const Gift = () => {
   const [recipentName, setRecipentName] = useState('')
   const [subjectLine, setSubjectLine] = useState('')
   
+  const { isLoading: isLoadGift, startLoading: startLoadPGift, stopLoading: stopLoadPGift } = useLoading()
+
   const emailHtml = render(<SendGiftMail userFirstname={recipentName} address={address} link={link} />);
 
   const { data: simulateGift, error: simulaterrorGift } = useSimulateContract({
@@ -69,6 +72,8 @@ const Gift = () => {
           tokenAmount: amount,
           tokenDecimals: 18,
           tokenType: 0,
+          tokenAddress: '0x874069fa1eb16d44d622f2e0ca25eea172369bc1',
+          baseUrl: 'http://localhost:3000/claim',
         },
       });
       setLink(link);
@@ -81,8 +86,9 @@ const Gift = () => {
 
   console.log(link);
 
-  const performGift = async (e) => {
-    e.preventDefault();
+  const performGift = async () => {
+    // e.preventDefault();
+    startLoadPGift();
 
     const link = await createPaymentLink();
 
@@ -108,17 +114,22 @@ const Gift = () => {
           console.log(error)
         }
       }
+
+      stopLoadPGift()
     } catch (error) {
       console.log(error)
+      stopLoadPGift()
     }
   }
 
-  const makeTx = async (e) => {
+  const handleGift = async (e) => {
     e.preventDefault();
     try {
-      await writeContractAsync(
-       simulateGift?.request
-     )
+      toast.promise(performGift(), {
+        pending: "Sending Gift",
+        success: "Gift Sent",
+        error: "Unrxpected Error contact admin",
+      })
    } catch (error) {
      console.log(error)
    }
@@ -160,7 +171,7 @@ const Gift = () => {
           {/* <CustomTextarea 
           onChange={(e) => setContent(e.target.value) }  className=" text-black"/> */}
           <div>
-            <button className=" bg-[#1e50ff] text-white w-[200px] h-[50px] rounded-lg  flex justify-center items-center">
+            <button className=" bg-[#1e50ff] text-white w-[200px] h-[50px] rounded-lg  flex justify-center items-center" disabled={isLoadGift}>
               Create Event
             </button>
           </div>

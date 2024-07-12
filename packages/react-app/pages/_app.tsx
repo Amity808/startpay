@@ -11,6 +11,8 @@ import { celo, celoAlfajores } from "viem/chains";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import Layout from "../components/Layout";
 import "../styles/globals.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify';
 
 const projectId = process.env.NEXT_PUBLIC_WC_PROJECT_ID as string; // get one at https://cloud.walletconnect.com/app
 
@@ -44,6 +46,18 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
           <SessionProvider>
+          <ToastContainer
+                        position="top-center"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
             <Layout>
               <Component {...pageProps} />
             </Layout>
