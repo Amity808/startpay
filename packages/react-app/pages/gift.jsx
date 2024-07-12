@@ -13,7 +13,7 @@ import {
 } from "wagmi";
 import startPayAbi from "../contract/startpay.json"
 import { render } from '@react-email/components';
-import { Welcome } from "../emails/Welcome"
+import SendGiftMail from "../emails/Welcome";
 
 // import {sendMailSMT } from "../libs/email"
 const Gift = () => {
@@ -25,8 +25,10 @@ const Gift = () => {
   const [txStatus, setTxStatus] = useState('')
   const [content, setContent] = useState("")
   const [email, setEmail] = useState('')
+  const [recipentName, setRecipentName] = useState('')
+  const [subjectLine, setSubjectLine] = useState('')
   
-  
+  const emailHtml = render(<SendGiftMail userFirstname={recipentName} address={address} />);
 
   const { data: simulateGift, error: simulaterrorGift } = useSimulateContract({
     abi: startPayAbi.abi,
@@ -92,16 +94,18 @@ const Gift = () => {
         },
         body: JSON.stringify({
           email: 'bolarinwamuhdsodiq0@gmail.com',
-          reciever: 'bolarinwamuhdsodiq0@gmail.com',
-          subject: 'Test mail',
-          message: 'test',
+          reciever: email,
+          subject: subjectLine,
+          message: emailHtml,
         }),
       }).then((res) => res.json()).then(data => console.log(data)).catch(err => console.log(err));
-    }
-    try {
-      
-    } catch (error) {
-      
+      try {
+         await writeContractAsync(
+          simulateGift?.request
+        )
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
   return (
@@ -109,6 +113,18 @@ const Gift = () => {
       <div className=" text-white flex justify-center items-center flex-col">
         <button onClick={performGift} className=" text-black">Send Email</button>
         <form action="">
+          <CustomInput
+            className={" mt-5 py-5 px-3 text-black" }
+            onChange={(e) => setRecipentName(e.target.value)}
+            placeholder={"Reciever Name"}
+            name={"name"}
+          />
+          <CustomInput
+            className={" mt-5 py-5 px-3 text-black" }
+            onChange={(e) => setSubjectLine(e.target.value)}
+            placeholder={"Subject message"}
+            name={"name"}
+          />
           <CustomInput
             className={" mt-5 py-5 px-3 text-black" }
             onChange={(e) => setAmount(e.target.value)}
