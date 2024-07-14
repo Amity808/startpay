@@ -31,6 +31,14 @@ const GiftNFT = () => {
   
   const { isLoading: isLoadGift, startLoading: startLoadPGift, stopLoading: stopLoadPGift } = useLoading()
 
+  const handleClear = () => {
+    setLink("")
+    setAmount("")
+    setEmail("")
+    setRecipentName("")
+    setSubjectLine("")
+    setContent("")
+  }
   
   const { data: simulateGift, error: simulaterrorGift } = useSimulateContract({
     abi: startPayAbi.abi,
@@ -44,9 +52,6 @@ const GiftNFT = () => {
   const { writeContractAsync } = useWriteContract();
   
   
-  const handleClear = () => {
-    setLink("")
-  }
   
   const writeSmart = async () => {
     
@@ -82,8 +87,7 @@ const GiftNFT = () => {
         linkDetails: {
           chainId: chainId,
           tokenAmount: amount,
-          tokenDecimals: 18,
-          tokenType: 1,
+          tokenType: 2,
           tokenAddress: '0x874069fa1eb16d44d622f2e0ca25eea172369bc1',
           // baseUrl: 'http://localhost:3000/claim',
         },
@@ -129,7 +133,7 @@ const GiftNFT = () => {
           console.log(error)
         }
       }
-
+      handleClear()
       stopLoadPGift()
     } catch (error) {
       console.log(error)
