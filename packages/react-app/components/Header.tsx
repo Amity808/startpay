@@ -66,6 +66,12 @@ export default function Header() {
                     >
                       Home
                     </a>
+                    <a
+                      href="/Gift"
+                      className="inline-flex items-center border-b-2 border-black px-1 pt-1 text-sm font-medium text-gray-900"
+                    >
+                      Gift
+                    </a>
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -97,6 +103,13 @@ export default function Header() {
                   className="block border-l-4 border-black py-2 pl-3 pr-4 text-base font-medium text-black"
                 >
                   Home
+                </Disclosure.Button>
+                <Disclosure.Button
+                  as="a"
+                  href="/gift"
+                  className="block border-l-4 border-black py-2 pl-3 pr-4 text-base font-medium text-black"
+                >
+                  Gift
                 </Disclosure.Button>
                 {/* Add here your custom menu elements */}
               </div>

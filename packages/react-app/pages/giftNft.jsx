@@ -17,7 +17,7 @@ import SendGiftMail from "../emails/Welcome";
 import useLoading from "../hooks/useLoading"
 import { toast } from "react-toastify";
 // import {sendMailSMT } from "../libs/email"
-const Gift = () => {
+const GiftNFT = () => {
   const [amount, setAmount] = useState("");
   const [claimTx, setClaimTx] = useState("");
   const [linkStatus, setLinkStatus] = useState("");
@@ -199,4 +199,4 @@ const Gift = () => {
   );
 };
 
-export default Gift;
+export default GiftNFT;
