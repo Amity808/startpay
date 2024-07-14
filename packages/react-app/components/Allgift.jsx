@@ -12,7 +12,7 @@ const Allgift = () => {
         args: []
     })
 
-    console.log(giftLen)
+
 
     const getGiftList = () => {
       if(!giftLen) return null;
@@ -21,7 +21,7 @@ const Allgift = () => {
       result.push(
         <GiftCard id={i} key={i} />
       )}
-      console.log(result, "result")
+   
       return result;
     }
   return (
