@@ -51,7 +51,10 @@ const Offset = () => {
   const createPool = async () => {
     startLoading()
     try {
-      const poolcreate = await contract.createPool(token, admin, config);
+      const gasLimit = 3000000; 
+      const poolcreate = await contract.createPool(token, address, config, {
+        gasLimit,
+      });
       const resultethe = await poolcreate.wait()
       console.log(resultethe, "result")
       // const result = await writeContractAsync(simulateCreatPool?.request);
