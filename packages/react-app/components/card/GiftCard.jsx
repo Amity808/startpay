@@ -50,6 +50,8 @@ const GiftCard = ({ id }) => {
   };
   return (
     <div>
+      { address == gifts?.owner ? (<>
+      
       <div className="card bg-[#1E002B] text-primary-content w-[348px] rounded-md">
         <div className="card-body  text-white rounded-lg py-5 px-4">
           <h2 className="card-title">Gift Sent Out</h2>
@@ -73,6 +75,7 @@ const GiftCard = ({ id }) => {
           </div>
         </div>
       </div>
+      </>) : (<>No Transaction History</>) }
     </div>
   );
 };

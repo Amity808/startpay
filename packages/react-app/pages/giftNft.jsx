@@ -191,7 +191,7 @@ const GiftNFT = () => {
           onChange={(e) => setContent(e.target.value) }  className=" text-black"/> */}
           <div>
             <button className=" bg-[#1E002B] text-white w-[200px] h-[50px] rounded-lg  flex justify-center items-center" disabled={isLoadGift}>
-              Create Event
+              Send
             </button>
           </div>
         </form>

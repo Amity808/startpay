@@ -7,7 +7,7 @@ export default function Home() {
     <main className="w-full flex justify-center text-gray-800 text-lg font-bold items-center">
       {!account
         ? 
-        "Connect your wallet to use SocialConnect sp"
+        "Connect your wallet to use SocialConnect and get started with our Dapp"
         : 
         
         (<>
