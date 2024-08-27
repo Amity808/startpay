@@ -9,6 +9,7 @@ import {
 } from "wagmi";
 import { ethers } from "ethers";
 import useLoading from "../hooks/useLoading";
+import OffsetForm from "../components/OffsetForm";
 
 const Offset = () => {
   const token = "0x671425ae1f272bc6f79bec3ed5c4b00e9c628240";
@@ -77,6 +78,7 @@ const Offset = () => {
     <div>
       <h1>Offset</h1>
       <button onClick={createPool}>Create Pool</button>
+      <OffsetForm />
     </div>
   );
 };
