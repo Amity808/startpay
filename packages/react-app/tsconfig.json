@@ -17,6 +17,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "emails/Welcome.tsx", "pages/libs/email.js", "pages/api/emails/send.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "emails/Welcome.tsx", "pages/libs/email.js", "pages/api/emails/send.js", "distributionpool/index.js"],
   "exclude": ["node_modules"]
 }
