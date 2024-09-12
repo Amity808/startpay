@@ -22,7 +22,8 @@
     "celo"
   ],
   "devDependencies": {
-    "daisyui": "^4.12.10"
+    "daisyui": "^4.12.10",
+    "hardhat": "^2.22.10"
   },
   "dependencies": {
     "@squirrel-labs/peanut-sdk": "^0.4.51"
