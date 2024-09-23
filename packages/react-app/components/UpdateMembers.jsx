@@ -31,7 +31,7 @@ const UpdateMembers = () => {
 
 
 
-    const createPool = async () => {
+    const updateMemberPool = async () => {
       if (!providerS) {
         // setMessage('Please connect your wallet first.');
         return;
@@ -59,7 +59,7 @@ const UpdateMembers = () => {
         <CustomInput type="text" className={" px-3 py-3 rounded-md mt-3 "} onChange={(e) => setAddressMember(e.target.value)} placeholder="Input Member Address" />
         <CustomInput type="text" className={" px-3 py-3 rounded-md mt-3 "} onChange={(e) => setpoolAddress(e.target.value)} placeholder="Input pool address" />
         <CustomInput type="text" className={" px-3 py-3 rounded-md mt-3 "} onChange={(e) => setNewUnit(e.target.value)} placeholder="uint member" />
-          <button onClick={createPool} className=' bg-yellow-300/100 p-3 rounded-lg mt-3'>Update Member</button>
+          <button onClick={updateMemberPool} className=' bg-yellow-300/100 p-3 rounded-lg mt-3'>Update Member</button>
     </div>
   )
 }
