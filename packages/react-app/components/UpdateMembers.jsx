@@ -41,7 +41,7 @@ const UpdateMembers = () => {
       const contract = new ethers.Contract(GDAv1ForwarderAddress, SuperfluidABI.abi, signer);
   
       try {
-        const tx = await contract.updateMemberUnits(poolAddress, addressMember, newUnit,  "0x00", {
+        const tx = await contract.updateMemberUnits(poolAddress, addressMember, newUnit,  "0x", {
           gasLimit: ethers.utils.hexlify(1000000),
         });
         const receipt = await tx.wait();
